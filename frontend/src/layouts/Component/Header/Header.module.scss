@@ -1,0 +1,29 @@
+.wrapper {
+    width: 100%;
+    height: var(--default-layout-header-height);
+    background-color: var(--white);
+    // background-color: #ccc;
+    box-shadow: 0 3px 6px #00000012, 0 10px 20px #0000000d;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+}
+
+.inner {
+    margin: auto;
+    width: var(--default-layout-width);
+    height: 100%;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.right-container {
+}
+.left-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
