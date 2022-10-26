@@ -4,24 +4,14 @@ import middlewareController from "../controllers/middlewareController.js";
 
 const router = express.Router();
 
-// router.get("/", middlewareController.verifyToken, imageController.getAllImage);
-// router.patch(
-//   "/update/:id",
-//   middlewareController.verifyToken,
-//   imageController.updateImage
-// );
-// router.post(
-//   "/upload",
-//   middlewareController.verifyToken,
-//   imageController.uploadImage
-// );
-// router.delete(
-//   "/delete/:id",
-//   // middlewareController.verifyTokenAndAdminAuth,
-//   imageController.deleteImage
-// );
-
 router.get("/", middlewareController.verifyToken, imageController.getAllImage);
+
+router.get(
+  "/:id",
+  // middlewareController.verifyToken,
+  imageController.getImageById
+);
+
 router.patch(
   "/update/:id",
   // middlewareController.verifyToken,
@@ -29,12 +19,12 @@ router.patch(
 );
 router.post(
   "/upload",
-  // middlewareController.verifyToken,
+  middlewareController.verifyToken,
   imageController.uploadImage
 );
 router.delete(
   "/delete/:id",
-  // middlewareController.verifyTokenAndAdminAuth,
+  middlewareController.verifyToken,
   imageController.deleteImage
 );
 

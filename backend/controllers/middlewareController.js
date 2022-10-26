@@ -25,9 +25,9 @@ const middlewareController = {
     middlewareController.verifyToken(req, res, () => {
       try {
         if (!req.user.admin) {
-          return res.status.json(
-            "You do not have the authority to perform this action"
-          );
+          return res
+            .status(401)
+            .json("You do not have the authority to perform this action");
         }
         next();
       } catch (err) {

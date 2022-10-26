@@ -1,6 +1,5 @@
 import Image from "../models/image.js";
 import multer from "multer";
-import sharp from "sharp";
 import fs from "fs";
 
 const Storage = multer.diskStorage({
@@ -52,30 +51,38 @@ const imageController = {
     }
   },
 
+  getImageById: async (req, res) => {
+    try {
+      // const image = await Image.findById({ _id: req.params.id });
+      const image = await Image.findById(req.params.id);
+      res.status(200).json(image);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
   deleteImage: async (req, res) => {
     try {
       const image = await Image.findByIdAndDelete(req.params.id);
+      //console.log(req.params.id);
       res.status(200).json("delete successfully");
     } catch (err) {
       res.status(500).json(err);
     }
   },
 
-  updateImage: (req, res) => {
-    Image.findByIdAndUpdate(
-      req.params.id,
-      {
+  updateImage: async (req, res) => {
+    try {
+      await Image.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         description: req.body.description,
         author: req.body.author,
-      },
-      (err, image) => {
-        if (err) {
-          return console.log(err);
-        }
-        res.status(200).json(image);
-      }
-    );
+      });
+
+      res.status(200).json("update successfully");
+    } catch (err) {
+      res.status(500).json(err);
+    }
   },
 };
 

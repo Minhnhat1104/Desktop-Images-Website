@@ -7,9 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createAxios } from '~/createInstance';
 import { loginSuccess } from '~/redux/authSlice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Button from '~/components/Button';
+import LoadingIcon from '~/components/LoadingIcon';
 
 const cx = classNames.bind(style);
 
@@ -17,6 +16,7 @@ function Home() {
     const user = useSelector((state) => state.auth.login?.currentUser);
     const [allImages, setAllImages] = useState([]);
     const [showLoading, setShowLoading] = useState(false);
+    const [rerender, setRerender] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const axoisJWT = createAxios(user, dispatch, loginSuccess);
@@ -38,7 +38,18 @@ function Home() {
         };
 
         fetchApi();
-    }, []);
+    }, [rerender]);
+
+    const handleDelete = async (id) => {
+        const res = await axoisJWT.delete(`/v1/image/delete/${id}`, {
+            headers: {
+                token: `BEARER ${user?.accessToken}`,
+            },
+        });
+        alert(res.data);
+        setRerender(!rerender);
+    };
+
     return (
         <div className={cx('wrapper')}>
             {allImages
@@ -64,6 +75,22 @@ function Home() {
                                           <p className={cx('data-label')}>{`Description: ${singleData.description}`}</p>
                                       </div>
                                   </div>
+                                  {singleData.author === user?.username ? (
+                                      <>
+                                          <Button
+                                              className={cx('delete-btn')}
+                                              outline
+                                              onClick={() => handleDelete(singleData._id)}
+                                          >
+                                              Delete
+                                          </Button>
+                                          <Button className={cx('update-btn')} outline to={`/update/${singleData._id}`}>
+                                              Update
+                                          </Button>
+                                      </>
+                                  ) : (
+                                      ''
+                                  )}
                                   <Button
                                       primary
                                       className={cx('download-btn')}
@@ -77,7 +104,7 @@ function Home() {
                       );
                   })
                 : ''}
-            {showLoading && <FontAwesomeIcon className={cx('loading-icon')} icon={faSpinner} />}
+            {showLoading && <LoadingIcon />}
         </div>
     );
 }

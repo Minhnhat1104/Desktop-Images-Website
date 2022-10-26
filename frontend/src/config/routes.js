@@ -2,7 +2,7 @@ const routes = {
     home: '/',
     login: '/login',
     register: '/register',
-    update: '/update',
+    update: '/update/:_id',
     upload: '/upload',
 };
 

@@ -59,6 +59,19 @@
 
 }
 
+.update-btn {
+    position: absolute;
+    bottom: 64px;
+    left: 8px;
+    z-index: 2;
+}
+
+.delete-btn {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    z-index: 2;
+}
 
 .download-btn {
     position: absolute;
@@ -69,17 +82,4 @@
 
 .img {
     width: 100%;
-}
-
-.loading-icon{
-    font-size: 3.2rem;
-    animation: rotate 3s linear infinite;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0);
-    } to {
-        transform: rotate(360deg);
-    }
 }

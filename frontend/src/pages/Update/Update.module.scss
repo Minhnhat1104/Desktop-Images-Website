@@ -1,14 +1,32 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.left {
+    flex: 1;
+}
+
+.right {
+    flex: 1;
+    max-width: 100%;
+
+}
+
+.img {
+    width: 100%;
+}
+
 .container {
     background-color: rgb(5 160 129 / 70%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 360px;
     border-radius: 40px;
     padding: 40px;
     margin: auto;
-    transform: translateY(calc(var(--default-layout-header-height) - 2 * var(--default-layout-header-height)));
+    max-width: 360px;
 }
 .title {
     font-size: 3.2rem;
