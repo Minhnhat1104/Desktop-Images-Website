@@ -1,12 +1,10 @@
-export const logoImage = ({ width = '2.4rem', height = '2.4rem', className, ...props }) => {
+const logoImage = ({ width = '2.4rem', height = '2.4rem', className, ...props }) => {
     return (
         <svg
             width="130"
             height="50"
+            class="DisplayNone_desktop-oversized__OPqkZ spacing_noMargin__Q_PsJ spacing_oversized-margin-right-50__Z6BXP spacing_desktop-margin-right-30__C4NEG spacing_mobile-margin-right-15__uM70E spacing_tablet-margin-right-15__zeT1z"
             viewBox="0 0 130.318 50"
-            {...props}
-            className={className}
-            xmlns="http://www.w3.org/2000/svg"
         >
             <g transform="translate(-3894 2762)">
                 <rect width="50" height="50" rx="8" transform="translate(3894 -2762)" fill="#07a081"></rect>
@@ -23,3 +21,5 @@ export const logoImage = ({ width = '2.4rem', height = '2.4rem', className, ...p
         </svg>
     );
 };
+
+export default logoImage;

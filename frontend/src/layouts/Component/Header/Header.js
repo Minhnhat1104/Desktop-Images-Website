@@ -1,12 +1,13 @@
 import Button from '~/components/Button';
 import classNames from 'classnames/bind';
 import style from './Header.module.scss';
-import { LogoImage } from '~/assets/img/logo.js';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createAxios } from '~/createInstance';
 import { logoutUser } from '~/redux/apiRequest';
 import { loginSuccess } from '~/redux/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import Logo from '~/assets/img/logo.js';
+
 const cx = classNames.bind(style);
 
 function Header() {
@@ -25,7 +26,11 @@ function Header() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('right-container')}>Some thing</div>
+                <div className={cx('right-container')}>
+                    <Link to="/">
+                        <Logo />
+                    </Link>
+                </div>
                 {user ? (
                     <div className={cx('left-container')}>
                         <Button outline to="/upload">

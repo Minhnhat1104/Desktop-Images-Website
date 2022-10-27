@@ -8,13 +8,13 @@ router.get("/", middlewareController.verifyToken, imageController.getAllImage);
 
 router.get(
   "/:id",
-  // middlewareController.verifyToken,
+  middlewareController.verifyToken,
   imageController.getImageById
 );
 
 router.patch(
   "/update/:id",
-  // middlewareController.verifyToken,
+  middlewareController.verifyToken,
   imageController.updateImage
 );
 router.post(

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingIcon from '~/components/LoadingIcon';
@@ -12,16 +11,24 @@ import { createAxios } from '~/createInstance';
 const cx = classNames.bind(style);
 
 function Update() {
-    const params = useParams();
-    const [showLoading, setShowLoading] = useState(false);
     const user = useSelector((state) => state.auth.login?.currentUser);
+    const [showLoading, setShowLoading] = useState(false);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
+    const params = useParams();
+    const dispatch = useDispatch();
+    const axoisJWT = createAxios(user, dispatch, loginSuccess);
+    const accessToken = user?.accessToken;
+
     useEffect(() => {
         const getImage = async () => {
             setShowLoading(true);
-            const res = await axios.get(`/v1/image/${params._id}`);
+            const res = await axoisJWT.get(`/v1/image/${params._id}`, {
+                headers: {
+                    token: `BEARER ${accessToken}`,
+                },
+            });
             setImage(res.data);
             setShowLoading(false);
         };
@@ -29,8 +36,6 @@ function Update() {
         getImage();
     }, []);
 
-    const dispatch = useDispatch();
-    const axoisJWT = createAxios(user, dispatch, loginSuccess);
     const handleSubmit = async (e) => {
         e.preventDefault();
         const body = {
@@ -38,16 +43,18 @@ function Update() {
             description,
             author: user?.username,
         };
-        console.log(name);
-        console.log(description);
-        console.log(user?.username);
 
         try {
-            const res = await axoisJWT.patch(`/v1/image/update/${params._id}`, body);
+            const res = await axoisJWT.patch(`/v1/image/update/${params._id}`, body, {
+                headers: {
+                    token: `BEARER ${accessToken}`,
+                },
+            });
             alert(res.data);
         } catch (err) {
             alert(err);
         }
+        e.target.reset();
     };
 
     let base64String = '';

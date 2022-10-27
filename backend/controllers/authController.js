@@ -89,7 +89,10 @@ const authController = {
   requestRefreshToken: (req, res) => {
     const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) {
-      return res.status(404).json("Refresh is not valid");
+      return res.status(404).json("You're not authenticated");
+    }
+    if (!refreshTokens.includes(refreshToken)) {
+      return res.status(403).json("Refresh is not valid");
     }
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY, (err, user) => {
       if (err) {
