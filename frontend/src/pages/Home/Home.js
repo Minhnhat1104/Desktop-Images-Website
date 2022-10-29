@@ -23,6 +23,7 @@ function Home() {
     useEffect(() => {
         if (!user) {
             navigate('/login');
+            return;
         }
         const accessToken = user?.accessToken;
         setShowLoading(true);
@@ -38,6 +39,7 @@ function Home() {
         };
 
         fetchApi();
+        // eslint-disable-next-line
     }, [rerender]);
 
     const handleDelete = async (id) => {

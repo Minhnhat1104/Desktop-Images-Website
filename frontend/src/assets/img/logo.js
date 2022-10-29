@@ -3,7 +3,7 @@ const logoImage = ({ width = '2.4rem', height = '2.4rem', className, ...props })
         <svg
             width="130"
             height="50"
-            class="DisplayNone_desktop-oversized__OPqkZ spacing_noMargin__Q_PsJ spacing_oversized-margin-right-50__Z6BXP spacing_desktop-margin-right-30__C4NEG spacing_mobile-margin-right-15__uM70E spacing_tablet-margin-right-15__zeT1z"
+            className="DisplayNone_desktop-oversized__OPqkZ spacing_noMargin__Q_PsJ spacing_oversized-margin-right-50__Z6BXP spacing_desktop-margin-right-30__C4NEG spacing_mobile-margin-right-15__uM70E spacing_tablet-margin-right-15__zeT1z"
             viewBox="0 0 130.318 50"
         >
             <g transform="translate(-3894 2762)">
